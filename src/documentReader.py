@@ -6,7 +6,7 @@ IF DATA IS MISSING, will be noted at ??? in the file
 """
 
 #Will be used when we find an exceptions
-from user_exceptions import *
+from userExceptions import *
 #All documents contain multiple sentences
 from sentence import *
 #Will produce a document

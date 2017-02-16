@@ -2,7 +2,7 @@
 Class that will contain a document (Basic unit -- "Primary Data-Structure)
 """
 
-form util import *
+from util import *
 from sentence import *
 
 
