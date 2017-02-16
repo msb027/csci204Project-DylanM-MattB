@@ -23,7 +23,10 @@ class Sentence:
         pass
 
 
-
+    def setSString(self):
+        """
+        """
+        pass
 
 def testSentence():
     """
