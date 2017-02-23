@@ -15,7 +15,7 @@ class Document:
         self.__fromInfo = fromInfo #Who was the document from
         self.__date = date
         self.__fwd = False
-        self._reply = False
+        self.__reply = False
 
 
     def __getitem__(self, index):
@@ -46,8 +46,8 @@ class Document:
     
     
     def setDate(self, year, month, day):
-        #should use date object in python timedate package
-        # mydate = timedate.date(year,month, day)
+        #should use date object in python datetime package
+        # mydate = datetime.date(year,month, day)
         #fill me
         pass
 
