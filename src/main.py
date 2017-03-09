@@ -44,7 +44,7 @@ def topMenu(info):
     print("3. Topic Analyis of Train")
     print("4. Topic Analyis of Eval")
     print("5. Find UnKnown From")
-    print("6. Find UnKnown To")
+    print("6. Find UnKnown To") #We will not be using this one
     print("7. Build Social Network Graph")
     t = int(input("?"))
     
