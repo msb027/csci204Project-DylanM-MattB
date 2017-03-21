@@ -55,6 +55,7 @@ class MyPlot:
                          color='g')
         plt.yticks(yLabels)
         plt.xticks(xLabels)
+        plt.show
 
 
 

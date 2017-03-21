@@ -50,7 +50,7 @@ class Document:
     def setDate(self, year, month, day):
         #should use date object in python datetime package
         # mydate = datetime.date(year,month, day)
-        self.__date = datime.date(year,month,day)
+        self.__date = datetime.date(year,month,day)
 
 
     def getDate(self):

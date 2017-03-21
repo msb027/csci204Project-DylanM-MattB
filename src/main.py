@@ -5,7 +5,10 @@ Recommended to use with anaconda (will have all packages)
 """
 
 from util import *
-
+import os
+from documentReader import DocumentReader
+from stats import Stats
+from plot import MyPlot
 
 def main():
     """
@@ -13,6 +16,25 @@ def main():
     """
     user_interface()
 
+def listDir(path, docList):
+    if not os.path.isdir( path ):
+        print( path )
+    else:
+        # Print the contents in this directory
+        # List everything
+        
+        for f in os.listdir( path ):
+            v = os.path.joint(path,f)
+            reader = DocumentReader(v)
+            docs.append(reader.readFile)
+        for f in os.listdir( path ):
+            # Convert it into a complete path, needed for 'isdir()'
+            # 'v' will be needed to run 'isdir()' when recursive call is made
+            v = os.path.join( path, f )
+            aPath = os.path.abspath(v)
+            if os.path.isdir(aPath):
+                listDir(aPath, docList)
+                
 def user_interface():
     """
     Will be used to interact with user
@@ -23,13 +45,21 @@ def user_interface():
     print("----Welcome to Enron Data Analysis----")
     print("Goals: (1) Who wrote an email (2) Communication Network -- Who talked to who")
     tpath = input("Please enter the filepath for the training data: ")
-    info.tpath = tpath
+    info.tPath = tpath
     print("Loading Training Documents")
     #FILL ME WITH CODE TO DO THIS, WRITE OUT IF SUCCESSFUL
+    docs = []
+    listDir(tpath, docs)
+    info.setTDocument(docs)
+    print('Training Files added successfully')
     epath = input("Please enter the filepath for the unknown data: " )
-    info.epath = epath
+    info.ePath = epath
     print("Loading Eval Documents")
     #FILL ME WITH CODE TO DO THIS, WRITE OUT IF SUCCESSFULL
+    docs = []
+    listDir(epath, docs)
+    info.setEDocument(docs)
+    print('Eval Files added successfully')
 
     
     #FILL ME... if everything is ok call the topMenu
@@ -44,7 +74,7 @@ def topMenu(info):
     print("3. Topic Analyis of Train")
     print("4. Topic Analyis of Eval")
     print("5. Find UnKnown From")
-    print("6. Find UnKnown To") #We will not be using this one
+    print("6. Find UnKnown To")
     print("7. Build Social Network Graph")
     t = int(input("?"))
     
@@ -70,8 +100,25 @@ def topicAnalyisTrain(info):
     We will prompt the user for how many topics "words" they are looking for
     After we will find this information and plot it using our Plot class
     """
-    print("Student to add")
+    try:
+        numTopics = int(input('How many topics(words) are you looking for?'))
+    except:
+        print('Please make sure your input in a number')
+        topicAnalysisTrain(info)
+        
+    wordList = []
+    for document in info.getTDocument():
+        for i in range(document.getSCount()):
+            wordList.extend(document[i].split())
+    
+    freqDic = Stats.findFreqDic(wordList)
+    topN = Stats.topNSort(freqDic,numTopics)
+    bottomN = Stats.bottomNSort(freqDic,numTopics)
+
+    MyPlot.twoDBar(list(topN),topN.values, list(topN), topN.values)
+    MyPlot.twoDBar(list(bottomN), bottomN.values, list(bottomN), bottomN.values)
     return None
+    
 
 
 def topicAnalysisEval(info):
@@ -80,7 +127,23 @@ def topicAnalysisEval(info):
     We will prompt the user for how many topics "words" they are looking for
     After we will find this information and plot it using our Plot class
     """
-    print("Student to add")
+    try:
+        numTopics = int(input('How many topics(words) are you looking for?'))
+    except:
+        print('Please make sure your input in a number')
+        topicAnalysisEval(info)
+        
+    wordList = []
+    for document in info.getEDocument():
+        for i in range(document.getSCount()):
+            wordList.extend(document[i].split())
+    
+    freqDic = Stats.findFreqDic(wordList)
+    topN = Stats.topNSort(freqDic,numTopics)
+    bottomN = Stats.bottomNSort(freqDic,numTopics)
+
+    MyPlot.twoDBar(list(topN),topN.values, list(topN), topN.values)
+    MyPlot.twoDBar(list(bottomN), bottomN.values, list(bottomN), bottomN.values)
     return None
 
 def findUnKnownFrom(info):

@@ -14,20 +14,20 @@ class UserInput:
         self.__eDocument = [] #A List of evaluation documents
         self.__textFilter = [] #A List of text filters
 
-    def setTDocumnet(self, docList):
-        pass
+    def setTDocument(self, docList):
+        self.__tDocument = docList
 
     def addTDocument(self, doc):
         """
         Add a training document
         """
-        pass
+        self.__tDocument.append(doc)
 
     def getTDocument(self):
         """
         Returns the training document list
         """
-        pass
+        return self.__tDocument
 
     def setEDocument(self, docList):
         pass
