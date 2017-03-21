@@ -18,7 +18,13 @@ class Stats:
         """
         Takes in a list of words, returns a dictionary of words/freq
         """
-        pass
+        freqDict = {}
+        for word in aList:
+            if word in freqDict:
+                freqDict[word] += 1
+            else:
+                freqDict[word] = 1
+        return freqDict
 
     @staticmethod
     def topNSort(aDic, n):
@@ -26,7 +32,12 @@ class Stats:
         Takes in a dictionary of words/freq (sort the list based on freq)
         Return a dictionary of n  word/freq with the highest freq
         """
-        pass
+        sortedKeys = sorted(aDic,key=aDic.get,reverse=True)
+        sortedValues = sorted(aDic.values(),reverse=True)
+        result = {}
+        for i in range(n):
+            result[sortedKeys[i]] = sortedValues[i]
+        return result
 
     @staticmethod
     def bottomNSort(aDic, n):
@@ -34,7 +45,12 @@ class Stats:
         Takes in a dictionary of words/freq (sort the list based on freq)
         Return a dictionary of n  word/freq with the lowest freq
         """
-        pass
+        sortedKeys = sorted(aDic,key=aDic.get)
+        sortedValues = sorted(aDic.values())
+        result = {}
+        for i in range(n):
+            result[sortedKeys[i]] = sortedValues[i]
+        return result
 
 
     @staticmethod
@@ -60,7 +76,11 @@ def testStats():
     """
     Can be used to test methods in the Stats Class
     """
-    pass
+    words = ["test","test","test","test2","test2","test3","whatever","blah"]
+    d = Stats.findFreqDic(words)
+    print(d)
+    print(Stats.topNSort(d,3))
+    print(Stats.bottomNSort(d,3))
 
 
 if __name__ == "__main__":
