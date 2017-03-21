@@ -1,4 +1,5 @@
 """
+Names: Dylan Mendelowitz and Matt Brown
 File that will keep a list of all user exceptions
 """
 

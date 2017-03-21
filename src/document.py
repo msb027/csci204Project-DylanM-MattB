@@ -1,4 +1,5 @@
 """
+Names: Dylan Mendelowitz and Matt Brown
 Class that will contain a document (Basic unit -- "Primary Data-Structure)
 """
 
@@ -7,8 +8,8 @@ from sentence import *
 
 
 class Document:
-    
-    def __init__(self, toInfo = None, fromInfo = None, data=None):
+
+    def __init__(self, toInfo = None, fromInfo = None, date=None):
         self.__sentences = []
         self.__sCount = -1 #Number of sentences
         self.__toInfo = toInfo #Who was the document to
@@ -23,54 +24,50 @@ class Document:
 
     def __setitem__(self, index, value):
         self.__sentence[index] = value
+        if self.__sCount == -1: #Not sure where else to incrememt .__sCount; no setter
+            self.__sCount = 1
+        else:
+            self.__sCount += 1
 
     def getSCount(self):
-        #fill me (we should not have to ever set sCount)
-        pass
+        return self.__sCount
+
 
     def setToInfo(self, value):
-        #fill me
-        pass
+        self.__toInfo = value
+
 
     def getToInfo(self):
-        #fill me
-        pass
+        return self.__toInfo
 
     def setFromInfo(self, value):
-        #fill me
-        pass
+        self.__fromInfo = value
 
     def getFromInfo(self):
-        #fill me
-        pass
-    
-    
+        return self.__fromInfo
+
+
     def setDate(self, year, month, day):
         #should use date object in python datetime package
         # mydate = datetime.date(year,month, day)
-        #fill me
-        pass
+        self.__date = datime.date(year,month,day)
+
 
     def getDate(self):
-        #returns year,month,day
-        pass
+        return self.__date
 
 
     def setFwd(self, value):
-        #fill me 
-        pass
+        self.__fwd = value
 
     def getFwd(self):
-        #fill me
-        pass
+        return self.__fwd
 
     def setReply(self,value):
-        #fill me
-        pass
-    
+        self.__reply = value
+
     def getReply(self):
-        #fill me 
-        pass
+        return self.__reply
 
 
 
@@ -88,4 +85,4 @@ if __name__ == "__main__":
 
 
 
-    
+
