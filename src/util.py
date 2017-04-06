@@ -38,12 +38,17 @@ class UserInput:
         Add an eval document
         """
         pass
+    
+    def getEDocument(self):
+        return self.__eDocument
 
-    def setTextFilter(self, filter):
-        pass
+    def setTextFilter(self, filterList):
+        self.__textFilter = filterList
+        
     
     def getTextFilter(self):
-        pass
+        return self.__textFilter
+        
         
 
 

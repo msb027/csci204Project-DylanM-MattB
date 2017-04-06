@@ -137,6 +137,7 @@ def addTextFilter(info):
         elif t == 5:
             filterList.append('stripFiles')
         else:
+            info.setTextFilter(filterList)
             break
     
 
@@ -144,8 +145,17 @@ def applyTextFilter(info):
     """
     Apply the text filter to both the training and eval Document Lists
     """
-    print("Student to add")
-    return None
+    filterInstance = TextFilter(info.getTextFilter())
+    tempTDoc = info.getTDocument()
+    tempEDoc = info.getEDocument()
+    
+    for doc in tempTDoc:
+        filterInstance.apply(doc)
+    
+    for doc in tempEDoc:
+        filterInstance.apply(doc)
+        
+    print('Text filters applied successfully!')
 
 def topicAnalysisTrain(info):
     """
@@ -221,6 +231,11 @@ def buildNetwork(info):
     print("To be added")
     return None
 
+def predictSKTree(info):
+    skTree = SKTree(info.getTDocument, info.getEDocument)
+    result = skTree.getPrediction()
+    return result
+    
 
 if __name__ == "__main__":
     main()
