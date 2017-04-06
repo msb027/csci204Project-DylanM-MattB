@@ -85,7 +85,7 @@ class DocumentReader:
             elif isBody == True:
                 sentences = line.replace('?','.')
                 sentences = sentences.replace('!','.')
-                sentences = sentences.split()
+                sentences = sentences.split('.')
                 for sentence in sentences:
                     newDoc[sentenceCount] = Sentence(sentence)
                     sentenceCount += 1

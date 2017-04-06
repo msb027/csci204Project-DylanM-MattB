@@ -9,6 +9,9 @@ import os
 from documentReader import DocumentReader
 from stats import Stats
 from plot import MyPlot
+from textFilter import *
+
+global filterList
 
 def main():
     """
@@ -78,14 +81,64 @@ def topMenu(info):
     print("7. Build Social Network Graph")
     t = int(input("?"))
     
-    #FILL ME, test if t is ok, if not do something smart
+    if t < 1 or t > 7:
+        print('Please enter a number from 1 to 7')
+        topMenu(info)
+    elif t == 1:
+        print('adding text filter')
+        addTextFilter(info)
+    elif t == 2:
+        print('applying text filter')
+        applyTextFilter(info)
+    elif t == 3:
+        print('starting topic analysis of train')
+        topicAnalysisTrain(info)
+    elif t == 4:
+        print('starting topic analysis of eval')
+        topicAnalysisEval(info)
+    elif t == 5:
+        print('Finding uknown from')
+        findUnKnownFrom(info)
+    elif t == 6:
+        print('Finding uknown to')
+        findUnKnownTo(info)
+    else:
+        print('Building social network')
+        buildNetwork(info)
 
 def addTextFilter(info):
     """
     Add information about which text filters to use, see TextFilter class for details
     """
-    print("Student to add")
-    return None
+    filterList = []
+    print("Please select the text filters you would like to add. Hit Return after each number you add, enter 6 when you have added all of the "\
+          "filters you would like:")
+    while True:
+        print("Enter Selection")
+        print("1. normalize white space")
+        print("2. normalize case")
+        print("3. strip null")
+        print("4. strip numbers")
+        print("5. strip files")
+        print("6. End")
+        t = int(input("?"))
+        
+        if t < 1 or t > 6:
+            print('Please enter a number from 1 to 6')
+            addTextFilter(info)
+        elif t == 1:
+            filterList.append('normalizeWhiteSpace')
+        elif t == 2:
+            filterList.append('normalizeCase')
+        elif t == 3:
+            filterList.append('stripNull')
+        elif t == 4:
+            filterList.append('stripNumbers')
+        elif t == 5:
+            filterList.append('stripFiles')
+        else:
+            break
+    
 
 def applyTextFilter(info):
     """
@@ -94,7 +147,7 @@ def applyTextFilter(info):
     print("Student to add")
     return None
 
-def topicAnalyisTrain(info):
+def topicAnalysisTrain(info):
     """
     We will analyze topics based on words in the email
     We will prompt the user for how many topics "words" they are looking for
