@@ -5,6 +5,7 @@ Class that will contain a document (Basic unit -- "Primary Data-Structure)
 
 from util import *
 from sentence import *
+from datetime import *
 
 
 class Document:
