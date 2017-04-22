@@ -6,6 +6,7 @@ Class that will contain a document (Basic unit -- "Primary Data-Structure)
 from util import *
 from sentence import *
 from datetime import *
+from stats import Stats
 
 
 class Document:
@@ -18,6 +19,7 @@ class Document:
         self.__date = date
         self.__fwd = False
         self.__reply = False
+        
 
 
     def __getitem__(self, index):
@@ -69,6 +71,41 @@ class Document:
 
     def getReply(self):
         return self.__reply
+    
+    def getAttributes(self,top10,bottom10):
+        attrList = []
+        if self.__fwd == True:
+            fwd = 1
+        else:
+            fwd = 0
+        if self.__reply == True:
+            reply = 1
+        else:
+            reply = 0
+        attrList.append(self.__date)
+        attrList.append(self.__toInfo)
+        attrList.append(self.__fromInfo)
+        attrList.append(fwd)
+        attrList.append(reply)
+        
+        hasTop10 = 1
+        for word in top10:
+            for sentence in self.__sentences:
+                if word not in sentence:
+                    hasTop10 = 0
+                    break
+      
+        hasBottom10 = 1
+        for word in bottom10:
+            for sentence in self.__sentences:
+                if word not in sentence:
+                    hasBottom10 = 0
+                    break
+        attrList.append(hasTop10)
+        attrList.append(hasBottom10)
+        
+        return attrList
+        
 
 
 
