@@ -1,4 +1,5 @@
 """
+Names: Dylan Mendelowitz and Matt Brown
 This is the file that contains your dicision tree
 """
 
@@ -21,6 +22,7 @@ class DTreeNode:
         
 
 def makeXData(trainDocs):
+    '''makes the 2D List that is the xData for training the tree'''
     xData = []
     names = {}
     dates = {}
@@ -53,6 +55,7 @@ def makeXData(trainDocs):
     return xData, names, dates
     
 def findTopBottom10(trainDocs):
+    '''determines the most and least common 10 words across the training docs'''
     allwords = []
     for doc in trainDocs:
         for s in range(doc.getSCount()):
@@ -72,6 +75,9 @@ class MyDecisionTree:
         self.__maxHeight = -1
         self.__minHeight = -1
         self.__xData, self.__names, self.__dates = makeXData(trainDocs)
+        self.__yData
+        self.train(self.__xData,self.__yData,self.__maxHeight)
+        self.eval(self.__xData)
 
 
     def train(self, xData, yData, maxDepth):
@@ -81,7 +87,7 @@ class MyDecisionTree:
         pass
     
     def split(self):
-        
+        '''splits the 2D list based off of whichever attribute has the lowest entropy'''
         minEntropy = min(self.__xData[-1])
         minEntropyIndex = self.__xData[-1].index(minEntropy)
         splitLists = {}
@@ -108,8 +114,15 @@ class MyDecisionTree:
         """
         External interface for evaluating the tree (Predicting)
         """
-        pass
-    #got Stuck
+        
+        '''
+        This will take the xData for the eval docs and walk the tree following 
+        the data in each node, matching it to the attributes of the eval docs based
+        off of the index stored in key.When it reaches the sender attribute, 
+        it will use the data it has trainedand the walk through the tree to 
+        return the sender data that is stored in that node in the tree, resulting 
+        in a predicition for the sender.
+        '''
 
     
     def __recursiveBuild(self, root, xData, yData, maxDepth):
@@ -130,7 +143,17 @@ class MyDecisionTree:
             root.children.append(DTreeNode(x,None,__recursiveBuild(newNode,xData)
         
         #Got stuck here
-    
+        
+        '''The rest of this code could be solved by finding the minimum entropy
+        in the xData. Then the code would call split to split on the attribute
+        with the min entropy. This would become a level in the tree with each
+        node storing the index that it came from in the xData as the key, and
+        the actual value of the attribute would be stored as the data. The rows
+        associated with each node would then have to get split again to create
+        the next level of the tree. This is where we got stuck because we 
+        were having trouble comprehending how to make the node and link it without
+        knowing the values of the next node.
+        '''
     def entropy(self,col):
         '''Calculate the entropy of each row'''
         entropyVal = 0

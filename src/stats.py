@@ -1,4 +1,5 @@
 """
+Names: Dylan Mendelowitz and Matt Brown
 This class will perform simple stats calcuations on our data
 Most of these will be static methods
 """

@@ -1,4 +1,5 @@
 """
+Names: Dylan Mendelowitz and Matt Brown
 This class will filter the information inside a Document
 and return a filtered (SAME) Document.
 """
@@ -35,16 +36,19 @@ class TextFilter:
             elif aFilter == "stripFiles": self.stripFiles()
 
     def normalizeWhiteSpace(self):
+        '''puts one space between words '''
         for i in range(self.__doc.getSCount()):
             temp = self._doc[i].split()
             temp = " ".join(temp)
             self._doc[i] = temp
 
     def normalizeCase(self):
+        '''makes all the text lowercase '''
         for i in range(self.__doc.getSCount()):
             self._doc[i] = self._doc[i].lower()
     
     def stripNull(self):
+        '''removes chars that are not letters or numbers'''
         toRemove = []
         for i in range(self._doc.getSCount()):
             for ch in self._doc[i]:
@@ -54,11 +58,13 @@ class TextFilter:
                 self._doc[i] = self._doc[i].replace(ch,"")
 
     def stripNumbers(self):
+        '''removes numbers'''
         for i in range(self.__doc.getSCount()):
             for num in range(10):
                 self._doc[i] = self._doc[i].replace(str(num),"")
             
     def stripFiles(self):
+        '''removes all words that are in a file in the wordfile/stripfile.txt file''''
         file = open("stripfile.txt","r")
         words = file.readlines()
         for i in range(self._doc.getSCount()):

@@ -39,6 +39,7 @@ class SKTree:
         return self.__evalYData
     
     def getTopBottom(self):
+        '''determines the top and bottom ten most common words in the documents '''
         allwords = []
         for doc in self.__trainDocs:
             for s in range(doc.getSCount()):
@@ -58,6 +59,7 @@ class SKTree:
             count += 1
     
     def readDocs(self):
+        '''pulls necessary attributes from the documents. '''
         nameCount = 0
         dateCount = 0
         self.getTopBottom()
@@ -80,6 +82,7 @@ class SKTree:
                 nameCount += 1
     
     def createXData(self):
+        '''Generates the 2D List that is the xData'''
         #[dates,recipients,forward,reply,numWords,top10,bottom10]
         dates = []
         recipients = []
@@ -120,6 +123,7 @@ class SKTree:
             self.__yData.append(self.__names[doc.getFromInfo()])
     
     def createEvalXData(self):
+        '''makes the xData for eval'''
         #[dates,recipients,forward,reply,numWords,top10,bottom10]
         dates = []
         recipients = []
@@ -142,6 +146,7 @@ class SKTree:
         self.__evalXData.extend(tempTopBottom)
     
     def train(self, xData, yData, maxDepth):
+        '''makes the decision tree'''
         self.__tree = DecisionTreeClassifier(criterion="entropy",max_depth=maxDepth,random_state=0)
         self.__tree = self.__tree.fit(xData,yData)
 

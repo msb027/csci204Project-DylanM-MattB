@@ -21,7 +21,7 @@ class Document:
         self.__reply = False
         
 
-
+    """ All the necessary setters and getters for the document class"""
     def __getitem__(self, index):
         return self.__sentences[index]
 
@@ -73,6 +73,8 @@ class Document:
         return self.__reply
     
     def getAttributes(self,top10,bottom10):
+        '''generates a list of the attributes for the document to be used for the
+        decision tree'''
         attrList = []
         if self.__fwd == True:
             fwd = 1

@@ -1,4 +1,5 @@
 """
+Names: Dylan Mendelowitz and Matt Brown
 Main Interface 
 Requirements:  matplotlib, numpy, scipy, sci-kit
 Recommended to use with anaconda (will have all packages)
@@ -79,6 +80,8 @@ def topMenu(info):
     print("5. Find UnKnown From")
     print("6. Find UnKnown To")
     print("7. Build Social Network Graph")
+    print('8. Build skTree')
+    print('9. Build our Decision Tree')
     t = int(input("?"))
     
     if t < 1 or t > 7:
@@ -102,9 +105,13 @@ def topMenu(info):
     elif t == 6:
         print('Finding uknown to')
         findUnKnownTo(info)
-    else:
+    elif t ==7:
         print('Building social network')
         buildNetwork(info)
+    elif t == 8:
+        predictSKTree(info)
+    else:
+        predictmyTree(info)
 
 def addTextFilter(info):
     """
@@ -235,6 +242,10 @@ def predictSKTree(info):
     skTree = SKTree(info.getTDocument, info.getEDocument)
     result = skTree.getPrediction()
     return result
+
+def predictmyTree(info):
+    myTree = myDecisionTree(info.getTDocument(),info.getEDocument)
+    return myTree
     
 
 if __name__ == "__main__":
